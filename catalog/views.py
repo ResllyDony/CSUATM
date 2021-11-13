@@ -33,5 +33,5 @@ def checkBalance(request):
 
     return render(request,'checkBalance.html',context=context)
 
-def withdraw(request):
-    
+def Withdraw(request):
+    pass
