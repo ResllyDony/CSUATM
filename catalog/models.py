@@ -17,7 +17,7 @@ class User(AbstractUser):
 
 class Account(models.Model):
 
-    acc_num = models.AutoField(primary_key= True)
+    acc_num = models.IntegerField(primary_key= True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     phone = models.IntegerField()
@@ -26,7 +26,7 @@ class Account(models.Model):
 
     
 class Card(models.Model):
-    card_num = models.AutoField(primary_key=True)
+    card_num = models.IntegerField(primary_key=True)
     account_num = models.ForeignKey(Account, on_delete = models.SET_NULL,null=True)
     pin = models.IntegerField(max_length=10)
     issue_date= models.DateField()
@@ -42,6 +42,9 @@ class Machine(models.Model):
     last_refill = models.DateTimeField()
     next_maintenance_date = models.DateField()
 
+    def __str__(self):
+        return f'{self.current_balance},{self.minimum_balance},{self.location},{self.last_refill},{self.next_maintenance_date}'
+
     
 class Transaction(models.Model):
     Transaction_id = models.AutoField(primary_key=True)
@@ -50,3 +53,4 @@ class Transaction(models.Model):
     date_time=models.DateTimeField()
     status = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
+    
